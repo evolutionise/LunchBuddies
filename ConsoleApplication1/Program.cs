@@ -27,6 +27,7 @@ namespace LunchBuddies
 
 		static string[] Shuffle(string[] list)
 		{
+			
 			//Fisher Yates Shuffle! 
 			//Takes each element and swaps it with one of the preceeding elements. 
 			var random = new Random();
@@ -40,19 +41,19 @@ namespace LunchBuddies
 			return list;
 		}
 
-		static IEnumerable<Pair> MatchPairs(string[] list1, string[] list2)
+		static IEnumerable<Biumvirate> MatchPairs(string[] list1, string[] list2)
 		{
-			var pairs = list1.Select((t, i) => new Pair() {Person1 = t, Person2 = list2[i]}).ToArray();
-			//what if list2 is longer than list1 by more than 1? Then this is screwed, but the problem is upstrea
+			var pairs = list1.Select((t, i) => new Biumvirate() {Person1 = t, Person2 = list2[i]}).ToArray();
+			//what if list2 is longer than list1 by more than 1? Then this is screwed, but the problem is upstream
 			if (list2.Length > list1.Length)
 			{
-				pairs[pairs.Length] = new Triumvirate() {Pair = pairs.Last(), Person3 = list2.Last()};
+				pairs[pairs.Length] = new Triumvirate() {Person1 = pairs.Last().Person1, Person2 = pairs.Last().Person2, Person3 = list2.Last()};
 			}
 			return pairs;
 		}
 	}
 
-	class Pair
+	class Biumvirate
 	{
 		public string Person1 { get; set; }
 		public string Person2 { get; set; }
@@ -63,9 +64,9 @@ namespace LunchBuddies
 		}
 	}
 
-	class Triumvirate : Pair
+	class Triumvirate : Biumvirate
 	{
-		public Pair Pair { get; set; }
+		
 		public string Person3 { get; set; }
 
 		public override void Print()
